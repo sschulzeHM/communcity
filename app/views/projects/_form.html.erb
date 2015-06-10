@@ -1,0 +1,13 @@
+<%= semantic_form_for @project do |f| %>
+  <%= f.inputs  do%>
+        <%= f.input :name %>
+        <%= f.input :location %>
+        <%= f.input :date_from%>
+        <%= f.input :date_to%>
+        <%= f.input :description%>
+        <%= f.input :category%>
+  <% end %>
+  <%= f.actions do %>
+    <%= f.action :submit, :as => :input %>
+  <% end %>
+<% end %>

@@ -1,0 +1,14 @@
+// Place all the styles related to the projects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.navbar-default .navbar-brand{
+  &.weak-brand{
+    font-weight: 100;
+  }
+
+  &.strong-brand{
+    color: green;
+    font-weight: 800;
+
+  }
+}
