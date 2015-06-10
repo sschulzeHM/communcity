@@ -8,6 +8,8 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+/config/secrets.yml
+/config/initializers/devise.rb
 
 ## Specific to RubyMotion:
 .dat*
