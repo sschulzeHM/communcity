@@ -1,4 +1,41 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @project.name %></h1>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Informationen</div>
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="sr-only">Ort: </span> <%= @project.location %>
+    </li>
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="sr-only">Verantalter: </span> <%= @project.organisation.name %>
+    </li>
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="sr-only">Dauer: </span> <%= @project.duration %>
+    </li>
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="sr-only">Prestige: </span> <%= @project.score %>
+    </li>
+  </ul>
+</div>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<div>
+  <h2>Um was geht's?</h2>
+
+  <p><%= @project.description %></p>
+</div>
+<div>
+  <h2>Wer ist dabei</h2>
+  <% if @project.users.empty? %>
+      <p>Noch Niemand :(</p>
+  <% else %>
+        <ul class="list-unstyled">
+          <%= render partial: "user", collection: @project.users %>
+        </ul>
+  <% end %>
+  </div>
+
+  <!--
+<%= link_to 'Edit', edit_project_path(@project) %>
 <%= link_to 'Back', projects_path %>
+-->
