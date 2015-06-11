@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611075125) do
+ActiveRecord::Schema.define(version: 20150611084437) do
 
   create_table "organisations", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20150611075125) do
     t.string   "name"
     t.integer  "score"
     t.string   "location"
-    t.integer  "longitude"
-    t.integer  "latitude"
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.text     "description"
@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 20150611075125) do
     t.string   "last_name"
     t.integer  "score"
     t.string   "location"
-    t.integer  "longitude"
-    t.integer  "latitude"
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
