@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611084437) do
+ActiveRecord::Schema.define(version: 20150611093219) do
 
   create_table "organisations", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -57,6 +57,11 @@ ActiveRecord::Schema.define(version: 20150611084437) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "projects_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -80,10 +85,5 @@ ActiveRecord::Schema.define(version: 20150611084437) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-
-  create_table "users_projects", id: false, force: :cascade do |t|
-    t.integer "users_id"
-    t.integer "project_id"
-  end
 
 end

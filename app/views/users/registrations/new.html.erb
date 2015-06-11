@@ -3,6 +3,7 @@
     <%= devise_error_messages! %>
     <%= f.input :first_name %>
     <%= f.input :last_name %>
+    <%= f.input :location %>
     <%= f.input :email, input_html: {autofocus: true} %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <%= f.input :password %>

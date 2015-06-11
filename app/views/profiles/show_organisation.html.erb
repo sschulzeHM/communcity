@@ -21,6 +21,11 @@
   <% if @organisation.projects.empty? %>
    <p>Noch Keine :(</p>
   <% else%>
-    <div><%= render partial: @organisation.projects%></div>
+
+    <div>
+      <ul class="list-unstyled">
+         <%= render partial: "project", collection: @organisation.projects%>
+      </ul>
+    </div>
   <% end%>
 </div>

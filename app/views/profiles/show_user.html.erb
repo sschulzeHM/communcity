@@ -1,2 +1,22 @@
-<h1><%= @user.first_name %></h1>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h1><%= concat_username @user %></h1></div>
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="sr-only">Ort: </span> <%= @user.location%></li>
+    <li class="list-group-item"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="sr-only">Prestige: </span> <%= @user.score %></li>
+  </ul>
+</div>
+<div>
+  <h2>Meine Projekte</h2>
+  <% if @user.projects.empty? %>
+      <p>Noch Keine :(</p>
+  <% else%>
+      <div>
+        <ul class="list-unstyled">
+          <%= render partial: "project", collection: @user.projects%>
+        </ul>
+      </div>
+  <% end%>
+</div>
 
