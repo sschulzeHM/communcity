@@ -1,1 +1,26 @@
-<h1><%= @organisation.name %></h1>
+
+
+<div class="panel panel-default">
+<!-- Default panel contents -->
+<div class="panel-heading"><h1><%= @organisation.name %></h1></div>
+<!-- List group -->
+<ul class="list-group">
+  <li class="list-group-item"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="sr-only">Ort: </span> <%= @organisation.location%></li>
+  <li class="list-group-item"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><span class="sr-only">Kontakt: </span> <%= @organisation.email%></li>
+  <li class="list-group-item"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="sr-only">Prestige: </span> <%= @organisation.score %></li>
+</ul>
+</div>
+
+<div>
+  <h2>Wer wir sind</h2>
+  <p><%= @organisation.description%></p>
+</div>
+
+<div>
+  <h2>Unsere Projekte</h2>
+  <% if @organisation.projects.empty? %>
+   <p>Noch Keine :(</p>
+  <% else%>
+    <div><%= render partial: @organisation.projects%></div>
+  <% end%>
+</div>

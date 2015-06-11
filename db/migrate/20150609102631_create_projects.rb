@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration
       t.string :location
       t.date :date_from
       t.date :date_to
-      t.integer :score
+      t.integer :score, default: 0, null: false
       t.text :description
       t.string :category
       t.float :longitude

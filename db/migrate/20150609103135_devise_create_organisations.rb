@@ -30,7 +30,7 @@ class DeviseCreateOrganisations < ActiveRecord::Migration
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
       t.string :name
-      t.integer :score
+      t.integer :score, default: 0, null: false
       t.string :location
       t.integer :longitude
       t.integer :latitude

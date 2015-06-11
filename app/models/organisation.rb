@@ -5,4 +5,13 @@ class Organisation < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :projects
+
+  before_save :calc_score
+
+  private
+
+  def calc_score
+    #stub
+    self.score = 10
+  end
 end

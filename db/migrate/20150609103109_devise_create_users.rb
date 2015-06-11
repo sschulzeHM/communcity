@@ -31,10 +31,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
       t.string :first_name
       t.string :last_name
-      t.integer :score
+      t.integer :score, default: 0, null: false
       t.string :location
-      t.integer :longitude
-      t.integer :latitude
+      t.integer :integer
+      t.integer :integer
 
       t.timestamps null: false
     end
