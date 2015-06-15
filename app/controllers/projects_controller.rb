@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add, :remove]
   before_action :authenticate_organisation!, only: [:new, :create]
 
   # GET /projects
@@ -59,6 +59,33 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def add
+
+    @project.users << current_user if current_user and not @project.has_user?(current_user)
+    respond_to do |format|
+      if @project.save
+      format.html { redirect_to @project, notice: "Du bist jetzt dabei!"}
+      format.json { render :show, status: :created, location: @project}
+      else
+        format.html { redirect_to @project, alert: "Etwas ist schiefgegangen"}
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove
+    @project.users.delete current_user if current_user
+    respond_to do |format|
+      if @project.save
+        format.html { redirect_to @project, notice: "Du bist nicht mehr dabei :("}
+        format.json { render :show, status: :created, location: @project}
+      else
+        format.html { redirect_to @project, alert: "Etwas ist schiefgegangen"}
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
     end
   end
 

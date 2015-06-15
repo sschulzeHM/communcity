@@ -5,16 +5,20 @@
   <!-- List group -->
   <ul class="list-group">
     <li class="list-group-item">
-      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="sr-only">Ort: </span> <%= @project.location %>
+      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+      <span class="sr-only">Ort: </span> <%= @project.location %>
     </li>
     <li class="list-group-item">
-      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="sr-only">Verantalter: </span> <%= @project.organisation.name %>
+      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+      <span class="sr-only">Verantalter: </span> <%= link_to @project.organisation.name, controller: "profiles", action: "show_organisation", id: @project.organisation %>
     </li>
     <li class="list-group-item">
-      <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="sr-only">Dauer: </span> <%= @project.duration %>
+      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+      <span class="sr-only">Dauer: </span> <%= @project.duration %>
     </li>
     <li class="list-group-item">
-      <span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="sr-only">Prestige: </span> <%= @project.score %>
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <span class="sr-only">Prestige: </span> <%= @project.score %>
     </li>
   </ul>
 </div>
@@ -32,6 +36,13 @@
         <ul class="list-unstyled">
           <%= render partial: "user", collection: @project.users %>
         </ul>
+  <% end %>
+  <% if user_signed_in? %>
+      <% unless @project.has_user?(current_user) %>
+            <%= button_to "Mitmachen", add_project_path, method: :post, class: ["btn", "btn-success", "btn-lg"] %>
+      <% else %>
+        <%= button_to "Keine Lust mehr...", remove_project_path, method: :delete, class: ["btn", "btn-danger", "btn-lg"] %>
+      <% end %>
   <% end %>
   </div>
 

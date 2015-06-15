@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
 
-  resources :projects
+  resources :projects do
+    member do
+      post :add
+      delete :remove
+    end
+  end
   devise_for :organisations
   devise_for :users
 

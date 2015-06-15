@@ -13,4 +13,12 @@ class Project < ActiveRecord::Base
     self.score = 10
   end
 
+  def has_user?(user)
+    user.in? self.users
+  end
+
+  def has_current_user?
+    has_user?(current_user)
+  end
+
 end
