@@ -28,5 +28,5 @@
       </ul>
     </div>
   <% end%>
-  <%= button_to "Neues Projekt anlegen", new_project_path, class: ["btn", "btn-primary"] if organisation_signed_in? and current_organisation === @organisation %>
+  <%= button_to "Neues Projekt anlegen", new_project_path, method: :get, class: ["btn", "btn-primary"] if organisation_signed_in? and current_organisation === @organisation %>
 </div>
