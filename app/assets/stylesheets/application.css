@@ -12,6 +12,11 @@
  *
  * require_tree .
  *= require_self
+ *= require jquery-ui
  *= require bootstrap_and_overrides
  *= require formtastic-bootstrap
  */
+
+#footer {
+    margin-top: 4em;
+}

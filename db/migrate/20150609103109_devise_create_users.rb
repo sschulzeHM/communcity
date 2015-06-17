@@ -33,8 +33,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.integer :score, default: 0, null: false
       t.string :location
-      t.integer :integer
-      t.integer :integer
+      t.integer :longitude
+      t.integer :latitude
 
       t.timestamps null: false
     end
