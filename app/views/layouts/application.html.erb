@@ -6,6 +6,7 @@
   <title><%= content_for?(:title) ? yield(:title) : "Communcity" %></title>
   <meta name="description" content="">
   <meta name="author" content="">
+
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -32,7 +33,7 @@
           <%= yield %>
         </div>
       </div>
-      <footer>
+      <footer id="footer">
         <div class="well">
          <p>Check the <a href="http://getbootstrap.com/components/">Bootstrap reference</a>, before you write your own components</p>
           <p>Also check out the <a href="http://getbootstrap.com/javascript/">Javascript library</a></p>
