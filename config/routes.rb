@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
 
-  get 'static/index'
-
   resources :projects
   devise_for :organisations
   devise_for :users
@@ -14,8 +12,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  #root 'projects#index'
-  root 'static#index'
+  root 'projects#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

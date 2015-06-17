@@ -1,1 +1,2 @@
-<li><%= concat_username user%></li>
+<!--TODO: make pretty-->
+<li><%= link_to concat_username(user), controller: "profiles", action: "show_user", id: user %></li>
