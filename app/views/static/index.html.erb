@@ -1,0 +1,214 @@
+<% content_for :head do %>
+
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <script>
+        function initialize() {
+            var mapCanvas = document.getElementById('map-canvas');
+            var mapOptions = {
+                center: new google.maps.LatLng(48.153858, 11.557649),
+                zoom: 15,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+            var iconBaseProjects = 'http://maps.google.com/mapfiles/kml/paddle/';
+            var iconBaseHome = 'http://maps.google.com/mapfiles/kml/shapes/';
+            var markerHome = new google.maps.Marker({
+                position: new google.maps.LatLng(48.153858, 11.557649),
+                map: map,
+                icon: iconBaseProjects + 'red-circle-lv.png'
+            });
+            var homeIW = "Mein Statndort";
+            var infowindowHome = new google.maps.InfoWindow({
+                content: homeIW
+            });
+            google.maps.event.addListener(markerHome, 'click', function () {
+                infowindowHome.open(map, markerHome);
+            });
+
+
+            var markerP1 = new google.maps.Marker({
+                position: new google.maps.LatLng(48.152942, 11.548835),
+                map: map,
+                icon: iconBaseProjects + 'ylw-circle-lv.png'
+            });
+            var P1IW = "Projekt 1: DHZ München";
+            var infowindowP1 = new google.maps.InfoWindow({
+                content: P1IW
+            });
+            google.maps.event.addListener(markerP1, 'click', function () {
+                infowindowP1.open(map, markerP1);
+            });
+
+
+            var markerP2 = new google.maps.Marker({
+                position: new google.maps.LatLng(48.154681, 11.557418),
+                map: map,
+                icon: iconBaseProjects + 'ylw-circle-lv.png'
+            });
+            var P2IW = "Projekt 2: Kindergarten";
+            var infowindowP2 = new google.maps.InfoWindow({
+                content: P2IW
+            });
+            google.maps.event.addListener(markerP2, 'click', function () {
+                infowindowP2.open(map, markerP2);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        $(document).ready(function () {
+            var minVal = "5";
+            $("#slider-1").slider({
+                        range: "min",
+                        min: 0,
+                        max: 100,
+                        value: minVal,
+                        slide: function (event, ui) {
+                            if (ui.value < minVal)
+                                return false;
+                            $("#km").text(ui.value);
+                        }
+                    }
+            );
+            $("#km").text(minVal);
+
+            $("#slider-2").slider({
+                range: true,
+                min: 0,
+                max: 1000,
+                step: 50,
+                values: [50, 1000],
+                slide: function (event, ui) {
+                    if (ui.values[0] < 50)
+                        return false;
+                    $("#SP1").text(ui.values[0]);
+                    $("#SP2").text(ui.values[1]);
+                }
+            });
+            $("#SP1").text($("#slider-2").slider("values", 0));
+            $("#SP2").text($("#slider-2").slider("values", 1));
+
+            $( "#datepicker1" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "dd.mm.yy"
+            });
+            $( "#datepicker2" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "dd.mm.yy"
+            });
+        });
+    </script>
+
+
+<% end %>
+
+
+
+
+<div id="static">
+
+  <!-- Filter -->
+  <div class="floatleft border1pxsolidgrey widthout staticheight">
+    <div id="filters">
+      <!--MyLocation-->
+      <div class="input-group input-group-sm" id="location">
+    <span class="input-group-addon" id="sizing-addon3">
+      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+
+    </span>
+        <input type="text" class="form-control" placeholder="Mein Standort" aria-describedby="sizing-addon3">
+      </div>
+
+      <div id="slider-1" class="slider"></div>
+      Umkreis:
+      <div id="km"></div>
+      km
+
+      <div class="input-group input-group-sm" id="tags">
+    <span class="input-group-addon" id="sizing-addon3">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+
+    </span>
+        <input type="text" class="form-control" placeholder="Tags" aria-describedby="sizing-addon3">
+      </div>
+
+      <div id="taglabels">
+        <span class="label label-success">krank</span>
+        <span class="label label-success">München</span>
+        <span class="label label-success">Krankenhaus</span>
+        <span class="label label-success">Kinder</span>
+      </div>
+
+      <div id="DateRange">
+
+        <div class="input-group input-group-sm">
+    <span class="input-group-addon" id="sizing-addon3">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+
+    </span>
+          <input type="text" class="form-control" placeholder="Von" aria-describedby="sizing-addon3" id="datepicker1">
+        </div>
+
+        <div class="input-group input-group-sm">
+    <span class="input-group-addon" id="sizing-addon3">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+
+    </span>
+          <input type="text" class="form-control" placeholder="Bis" aria-describedby="sizing-addon3" id="datepicker2">
+        </div>
+
+      </div>
+
+
+      <div id="SPSlider">
+        ScorePoints:
+        <div id="SP1" class="SP"></div>
+        -
+        <div id="SP2" class="SP"></div>
+        <div id="slider-2" class="slider"></div>
+      </div>
+    </div>
+
+    <div id="legend">
+
+      <div class="legendItem"><%= image_tag "red-circle-lv.png" %> Mein Standort</div>
+      <div class="legendItem"><%= image_tag "ylw-circle-lv.png" %> Projekte <span class="badge">2</span></div>
+
+    </div>
+
+  </div>
+
+  <!-- Map -->
+  <div class="floatleft widthin staticheight" id="map-canvas"></div>
+
+
+  <!-- Projects -->
+  <div class="floatleft border1pxsolidgrey widthout staticheight">
+
+    <div class="listProject">
+      <div class="bold">Projekt 1: Kindergarten</div>
+      <div class="italic">Mit Kindern im Kindergarten spielen.</div>
+      <div class="scorePoints">ScorePoints: 100</div>
+      <a href="#">weitere Infos</a>
+    </div>
+
+    <div class="listProject">
+      <div class="bold">Projekt 2: DHZ München</div>
+      <div class="italic">Spielenachmittag mit herzkranken Menschen.</div>
+      <div class="scorePoints">ScorePoints: 150</div>
+      <a href="#">weitere Infos</a>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="clear"></div>
+
+
+
+

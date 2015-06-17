@@ -1,0 +1,87 @@
+// Place all the styles related to the static controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$bordersearch: #CCCCCC;
+$marginbetweenfilters: 1.5em;
+
+.border1pxsolidgrey {
+  border: 1px solid $bordersearch;
+}
+.widthout {
+  width: 15em;
+  padding: 1em;
+}
+.widthin {
+  width: 40em;
+}
+.floatleft {
+  float: left;
+}
+#map-canvas {
+  border-bottom: 1px solid $bordersearch;
+  border-top: 1px solid $bordersearch;
+
+}
+.staticheight {
+  height: 30em;
+}
+#static {
+  margin: auto;
+  width: 70em;
+
+}
+.listProject {
+  margin-bottom: 1em;
+  font-size: 0.9em;
+}
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+}
+#slider-1 {
+  margin-bottom: 0.5em;
+}
+#tags {
+  margin-top: $marginbetweenfilters;
+}
+#location {
+  margin-bottom: 1em;
+}
+#km {
+  width: 1.5em;
+  display: inline-block;
+}
+.SP {
+  width: 2.3em;
+  display: inline-block;
+}
+#taglabels{
+  margin-top: 0.5em;
+}
+#filters {
+  height: 25em;
+}
+.legendItem {
+  vertical-align: bottom;
+
+  img {
+    margin-top: -3px;
+  }
+}
+#slider-2 {
+  margin-top: 0.5em;
+}
+.slider {
+  width: 95%;
+}
+#SPSlider {
+  margin-top: $marginbetweenfilters;
+}
+#DateRange {
+  margin-top: $marginbetweenfilters;
+}
+div.ui-datepicker{
+   font-size:0.8em;
+ }
