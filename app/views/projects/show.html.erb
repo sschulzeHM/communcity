@@ -33,20 +33,20 @@
   <% if @project.users.empty? %>
       <p>Noch Niemand :(</p>
   <% else %>
-        <ul class="list-unstyled">
-          <%= render partial: "user", collection: @project.users %>
-        </ul>
+      <ul class="list-unstyled">
+        <%= render partial: "user", collection: @project.users %>
+      </ul>
   <% end %>
   <% if user_signed_in? %>
       <% unless @project.has_user?(current_user) %>
-            <%= button_to "Mitmachen", add_project_path, method: :post, class: ["btn", "btn-success", "btn-lg"] %>
+          <%= button_to "Mitmachen", add_project_path, method: :post, class: ["btn", "btn-success", "btn-lg"] %>
       <% else %>
-        <%= button_to "Keine Lust mehr...", remove_project_path, method: :delete, class: ["btn", "btn-danger", "btn-lg"] %>
+          <%= button_to "Keine Lust mehr...", remove_project_path, method: :delete, class: ["btn", "btn-danger", "btn-lg"] %>
       <% end %>
   <% end %>
-  </div>
+</div>
 
-  <!--
+<!--
 <%= link_to 'Edit', edit_project_path(@project) %>
 <%= link_to 'Back', projects_path %>
 -->
