@@ -5,6 +5,10 @@ class Project < ActiveRecord::Base
 
   STATE = {UPCOMING: "Upcoming", IN_PROGRESS: "In Progress", OVER: "Over", DONE: "Done"}
 
+  def self.by_date
+    Project.all.order(date_from: :desc)
+  end
+
   def duration
     #should be prettier
     TimeDifference.between(date_from, date_to).in_hours

@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.by_date
   end
 
   # GET /projects/1
@@ -63,7 +63,6 @@ class ProjectsController < ApplicationController
   end
 
   def add
-
     @project.users << current_user if current_user and @project.joinable? current_user
     respond_to do |format|
       if @project.save
