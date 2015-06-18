@@ -15,8 +15,10 @@ class Project < ActiveRecord::Base
   end
 
   def calc_score
-    #stub
-    self.score = 10
+    #initial score depending on project duration
+    self.score= duration*10
+    #bonus depending on number of users
+    self.score += users.size*10
   end
 
   def has_user?(user)
@@ -44,7 +46,7 @@ class Project < ActiveRecord::Base
   end
 
   def joinable?(user)
-    not @project.has_user?(user) and @project.has_room? and not (over or complete)
+    not has_user?(user) and has_room? and not (done or state === STATE[:OVER])
   end
 
 end
