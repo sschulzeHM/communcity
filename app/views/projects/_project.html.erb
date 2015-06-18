@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><%= link_to "#{project.name}", project%><span class="<%= state_label_class project.state%>"><%=project.state%></span></div>
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+      <span class="sr-only">Ort: </span> <%= project.location %>
+    </li>
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+      <span class="sr-only">Verantalter: </span> <%= link_to project.organisation.name, controller: "profiles", action: "show_organisation", id: project.organisation %>
+    </li>
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+      <span class="sr-only">Start: </span> <%= project.date_from %>
+    </li>
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+      <span class="sr-only">Dauer: </span> <%= project.duration %>
+    </li>
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      <span class="sr-only">Prestige: </span> <%= project.score %>
+    </li>
+  </ul>
+</div>

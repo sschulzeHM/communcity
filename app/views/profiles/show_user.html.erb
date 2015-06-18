@@ -1,14 +1,22 @@
 <h1><%= concat_username @user %></h1>
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Informationen</div>
-  <!-- List group -->
-  <ul class="list-group">
-    <li class="list-group-item"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="sr-only">Ort: </span> <%= @user.location%></li>
-    <li class="list-group-item"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="sr-only">Prestige: </span> <%= @user.score %></li>
-  </ul>
+<div class="row">
+  <div class="col-md-2">
+        <%= image_tag "default-avatar.jpg", class: "img-thumbnail" %>
+  </div>
+  <div class="col-md-10">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">Informationen</div>
+      <!-- List group -->
+      <ul class="list-group">
+        <li class="list-group-item"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="sr-only">Ort: </span> <%= @user.location%></li>
+        <li class="list-group-item"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="sr-only">Prestige: </span> <%= @user.score %></li>
+      </ul>
+    </div>
+  </div>
 </div>
-<div>
+<div class="row">
+
   <h2>Meine Projekte</h2>
   <% if @user.projects.empty? %>
       <p>Noch Keine :(</p>
