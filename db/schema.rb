@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150617114305) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "name"
-    t.integer  "score"
+    t.integer  "score",                  default: 0,  null: false
     t.string   "location"
     t.float    "longitude"
     t.float    "latitude"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150617114305) do
     t.string   "location"
     t.date     "date_from"
     t.date     "date_to"
-    t.integer  "score"
+    t.integer  "score",           default: 0,     null: false
     t.text     "description"
     t.string   "category"
     t.float    "longitude"
@@ -77,10 +77,9 @@ ActiveRecord::Schema.define(version: 20150617114305) do
     t.string   "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "score"
+    t.integer  "score",                  default: 0,  null: false
     t.string   "location"
-    t.float    "longitude"
-    t.float    "latitude"
+    t.integer  "integer"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end

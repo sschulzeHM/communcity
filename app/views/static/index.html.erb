@@ -3,74 +3,176 @@
     <script src="https://maps.googleapis.com/maps/api/js"></script>
 
     <script>
-        function initialize() {
-            var mapCanvas = document.getElementById('map-canvas');
-            var mapOptions = {
-                center: new google.maps.LatLng(48.153858, 11.557649),
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-            var map = new google.maps.Map(mapCanvas, mapOptions);
-            var iconBaseProjects = 'http://maps.google.com/mapfiles/kml/paddle/';
-            var iconBaseHome = 'http://maps.google.com/mapfiles/kml/shapes/';
-            var markerHome = new google.maps.Marker({
-                position: new google.maps.LatLng(48.153858, 11.557649),
-                map: map,
-                icon: iconBaseProjects + 'red-circle-lv.png'
-            });
-            var homeIW = "Mein Statndort";
-            var infowindowHome = new google.maps.InfoWindow({
-                content: homeIW
-            });
-            google.maps.event.addListener(markerHome, 'click', function () {
-                infowindowHome.open(map, markerHome);
-            });
-
-
-            var markerP1 = new google.maps.Marker({
-                position: new google.maps.LatLng(48.152942, 11.548835),
-                map: map,
-                icon: iconBaseProjects + 'ylw-circle-lv.png'
-            });
-            var P1IW = "Projekt 1: DHZ München";
-            var infowindowP1 = new google.maps.InfoWindow({
-                content: P1IW
-            });
-            google.maps.event.addListener(markerP1, 'click', function () {
-                infowindowP1.open(map, markerP1);
-            });
-
-
-            var markerP2 = new google.maps.Marker({
-                position: new google.maps.LatLng(48.154681, 11.557418),
-                map: map,
-                icon: iconBaseProjects + 'ylw-circle-lv.png'
-            });
-            var P2IW = "Projekt 2: Kindergarten";
-            var infowindowP2 = new google.maps.InfoWindow({
-                content: P2IW
-            });
-            google.maps.event.addListener(markerP2, 'click', function () {
-                infowindowP2.open(map, markerP2);
-            });
-        }
-        google.maps.event.addDomListener(window, 'load', initialize);
 
         $(document).ready(function () {
-            var minVal = "5";
+
+            var map;
+            var minVal = "0";
+            var zoomlevels = [15, 14, 10, 9, 8];
+            var kmdisplay = [5, 10, 25, 50, 100];
+            var initialzoom = zoomlevels[minVal];
+            var markerHome;
+            var iconBaseProjects = 'http://maps.google.com/mapfiles/kml/paddle/';
+            var iconBaseHome = 'http://maps.google.com/mapfiles/kml/shapes/';
+
+            function initialize() {
+
+                var mapCanvas = document.getElementById('map-canvas');
+                var mapOptions = {
+                    //center: new google.maps.LatLng(48.153858, 11.557649),
+                    zoom: initialzoom,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                map = new google.maps.Map(mapCanvas, mapOptions);
+
+                var markerP1 = new google.maps.Marker({
+                    position: new google.maps.LatLng(48.152942, 11.548835),
+                    map: map,
+                    icon: iconBaseProjects + 'ylw-circle-lv.png'
+                });
+                var P1IW = "Projekt 1: DHZ München";
+                var infowindowP1 = new google.maps.InfoWindow({
+                    content: P1IW
+                });
+                google.maps.event.addListener(markerP1, 'click', function () {
+                    infowindowP1.open(map, markerP1);
+                });
+
+                var markerP2 = new google.maps.Marker({
+                    position: new google.maps.LatLng(48.154681, 11.557418),
+                    map: map,
+                    icon: iconBaseProjects + 'ylw-circle-lv.png'
+                });
+                var P2IW = "Projekt 2: Kindergarten";
+                var infowindowP2 = new google.maps.InfoWindow({
+                    content: P2IW
+                });
+                google.maps.event.addListener(markerP2, 'click', function () {
+                    infowindowP2.open(map, markerP2);
+                });
+
+                // Try HTML5 geolocation
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos = new google.maps.LatLng(position.coords.latitude,
+                                position.coords.longitude);
+
+                        if(markerHome != undefined) {
+                            markerHome.setMap(null);
+                        }
+
+                        markerHome = new google.maps.Marker({
+                            position: new google.maps.LatLng(position.coords.latitude,
+                                    position.coords.longitude),
+                            map: map,
+                            icon: iconBaseProjects + 'red-circle-lv.png'
+                        });
+
+                        map.setCenter(pos);
+                        map.setZoom(initialzoom);
+                    }, function () {
+                        handleNoGeolocation(true);
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleNoGeolocation(false);
+                }
+            }
+
+            function handleNoGeolocation(errorFlag) {
+                if (errorFlag) {
+                    var content = 'Error: Ortungsfunktion fehlgeschlegen. Bitte Standort manuell eingeben.';
+                } else {
+                    var content = 'Error: Ihr Browser unterstützt keine Ortungsfunktion. Bitte Standort manuell eingeben.';
+                }
+
+                var options = {
+                    map: map,
+                    position: new google.maps.LatLng(60, 105),
+                    content: content
+                };
+
+                var infowindow = new google.maps.InfoWindow(options);
+                map.setCenter(options.position);
+
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+
+            $("#locationinput").bind("enterKey", function (e) {
+
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'address': $("#locationinput").val()}, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var pos = new google.maps.LatLng(results[0].geometry.location.lat(),
+                                results[0].geometry.location.lng());
+
+                        if(markerHome != undefined) {
+                            markerHome.setMap(null);
+                        }
+
+                        markerHome = new google.maps.Marker({
+                            position: pos,
+                            map: map,
+                            icon: iconBaseProjects + 'red-circle-lv.png'
+                        });
+
+                        map.setCenter(pos);
+                        map.setZoom(initialzoom);
+
+                    } else {
+                        alert("Die Eingabe \'" + $("#locationinput").val() + "\' liefert kein Ergebnis! \n Fehlercode: " + status);
+                    }
+                });
+            });
+            $("#locationinput").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $(this).trigger("enterKey");
+                }
+            });
+
+            function getLocation() {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var pos = new google.maps.LatLng(position.coords.latitude,
+                            position.coords.longitude);
+
+                    if(markerHome != undefined) {
+                        markerHome.setMap(null);
+                    }
+
+                    markerHome = new google.maps.Marker({
+                        position: new google.maps.LatLng(position.coords.latitude,
+                                position.coords.longitude),
+                        map: map,
+                        icon: iconBaseProjects + 'red-circle-lv.png'
+                    });
+
+                    map.setCenter(pos);
+                    map.setZoom(initialzoom);
+                });
+            }
+
+            $(document).on('click', '#getlocation', function () {
+                getLocation();
+            });
+
+
             $("#slider-1").slider({
                         range: "min",
                         min: 0,
-                        max: 100,
+                        max: zoomlevels.length - 1,
                         value: minVal,
+                        stop: function (event, ui) {
+                            map.setZoom(zoomlevels[ui.value]);
+                        },
                         slide: function (event, ui) {
                             if (ui.value < minVal)
                                 return false;
-                            $("#km").text(ui.value);
+                            $("#km").text(kmdisplay[ui.value]);
                         }
                     }
             );
-            $("#km").text(minVal);
+            $("#km").text(kmdisplay[minVal]);
 
             $("#slider-2").slider({
                 range: true,
@@ -88,35 +190,33 @@
             $("#SP1").text($("#slider-2").slider("values", 0));
             $("#SP2").text($("#slider-2").slider("values", 1));
 
-            $( "#datepicker1" ).datepicker({
+            $("#datepicker1").datepicker({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: "dd.mm.yy"
             });
-            $( "#datepicker2" ).datepicker({
+            $("#datepicker2").datepicker({
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: "dd.mm.yy"
             });
-        });
 
-        /*Pressing the Enter key in TagInputField*/
-        $(document).ready(function () {
+            /*Pressing the Enter key in TagInputField*/
 
-        $("#taginput").bind("enterKey",function(e){
-            $("#taglabels").append("<span class='label label-success'><span class='removespan'>x</span>" + $("#taginput").val() + "</span> ");
-            $("#taginput").val("")
-        });
-        $("#taginput").keyup(function(e){
-            if(e.keyCode == 13)
-            {
-                $(this).trigger("enterKey");
-            }
-        });
+            $("#taginput").bind("enterKey", function (e) {
+                $("#taglabels").append("<span class='label label-success'>" + $("#taginput").val() + "<span class='removespan'>x</span></span> ");
+                $("#taginput").val("")
+            });
+            $("#taginput").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $(this).trigger("enterKey");
+                }
+            });
 
-        $(document).on('click', '.removespan', function(){
-            $(this).parent().remove();
-        });
+            $(document).on('click', '.removespan', function () {
+                $(this).parent().remove();
+            });
+
 
         });
     </script>
@@ -134,11 +234,11 @@
     <div id="filters">
       <!--MyLocation-->
       <div class="input-group input-group-sm" id="location">
-    <span class="input-group-addon" id="sizing-addon3">
-      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+    <span class="input-group-addon" id="locationclick">
+      <span id="getlocation" class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
 
     </span>
-        <input type="text" class="form-control" placeholder="Mein Standort" aria-describedby="sizing-addon3">
+        <input id="locationinput" type="text" class="form-control" placeholder="Mein Standort" aria-describedby="sizing-addon3">
       </div>
 
       <div id="slider-1" class="slider"></div>
@@ -200,24 +300,26 @@
   <div class="floatleft widthin staticheight" id="map-canvas"></div>
 
 
-  <!-- Projects -->
-  <div class="floatleft border1pxsolidgrey widthout staticheight">
+</div>
 
-    <div class="listProject">
-      <div class="bold">Projekt 1: Kindergarten</div>
-      <div class="italic">Mit Kindern im Kindergarten spielen.</div>
-      <div class="scorePoints">ScorePoints: 100</div>
-      <a href="#">weitere Infos</a>
-    </div>
+<!-- Projects -->
+<div class="floatleft border1pxsolidgrey widthout staticheight">
 
-    <div class="listProject">
-      <div class="bold">Projekt 2: DHZ München</div>
-      <div class="italic">Spielenachmittag mit herzkranken Menschen.</div>
-      <div class="scorePoints">ScorePoints: 150</div>
-      <a href="#">weitere Infos</a>
-    </div>
-
+  <div class="listProject">
+    <div class="bold">Projekt 1: Kindergarten</div>
+    <div class="italic">Mit Kindern im Kindergarten spielen.</div>
+    <div class="scorePoints">ScorePoints: 100</div>
+    <a href="#">weitere Infos</a>
   </div>
+
+  <div class="listProject">
+    <div class="bold">Projekt 2: DHZ München</div>
+    <div class="italic">Spielenachmittag mit herzkranken Menschen.</div>
+    <div class="scorePoints">ScorePoints: 150</div>
+    <a href="#">weitere Infos</a>
+  </div>
+
+</div>
 
 </div>
 

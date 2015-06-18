@@ -67,6 +67,10 @@ $marginbetweenfilters: 1.5em;
     margin-top: -3px;
   }
 }
+#slider-1 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
 #slider-2 {
   margin-top: 0.5em;
 }
@@ -83,7 +87,13 @@ div.ui-datepicker{
    font-size:0.8em;
  }
 .removespan {
-  margin-right: 0.6em;
+  margin-left: 0.6em;
   cursor: pointer;
   color: #2E2F30;
+}
+#getlocation {
+  cursor: pointer;
+}
+#locationclick:active {
+  background-color: #CCCCCC;
 }
