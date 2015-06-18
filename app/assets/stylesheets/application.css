@@ -19,4 +19,20 @@
 
 #footer {
     margin-top: 4em;
+    font-size: 0.85em;
+    border-top: 1px solid #CCCCCC;
+    padding: 1em;
+    margin-bottom: 4em;
+}
+
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}
+
+#contactform {
+    width: 20em;
 }

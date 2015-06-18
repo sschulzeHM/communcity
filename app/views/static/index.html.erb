@@ -99,6 +99,26 @@
                 dateFormat: "dd.mm.yy"
             });
         });
+
+        /*Pressing the Enter key in TagInputField*/
+        $(document).ready(function () {
+
+        $("#taginput").bind("enterKey",function(e){
+            $("#taglabels").append("<span class='label label-success'><span class='removespan'>x</span>" + $("#taginput").val() + "</span> ");
+            $("#taginput").val("")
+        });
+        $("#taginput").keyup(function(e){
+            if(e.keyCode == 13)
+            {
+                $(this).trigger("enterKey");
+            }
+        });
+
+        $(document).on('click', '.removespan', function(){
+            $(this).parent().remove();
+        });
+
+        });
     </script>
 
 
@@ -131,14 +151,10 @@
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 
     </span>
-        <input type="text" class="form-control" placeholder="Tags" aria-describedby="sizing-addon3">
+        <input id="taginput" type="text" class="form-control" placeholder="Tags" aria-describedby="sizing-addon3">
       </div>
 
       <div id="taglabels">
-        <span class="label label-success">krank</span>
-        <span class="label label-success">München</span>
-        <span class="label label-success">Krankenhaus</span>
-        <span class="label label-success">Kinder</span>
       </div>
 
       <div id="DateRange">

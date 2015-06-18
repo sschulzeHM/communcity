@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'static#index'
 
+  get 'static/agb' => 'static#agb'
+  get 'static/impressum' => 'static#impressum'
+  get 'static/contact' => 'static#contact'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

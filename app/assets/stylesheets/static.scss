@@ -14,9 +14,6 @@ $marginbetweenfilters: 1.5em;
 .widthin {
   width: 40em;
 }
-.floatleft {
-  float: left;
-}
 #map-canvas {
   border-bottom: 1px solid $bordersearch;
   border-top: 1px solid $bordersearch;
@@ -85,3 +82,8 @@ $marginbetweenfilters: 1.5em;
 div.ui-datepicker{
    font-size:0.8em;
  }
+.removespan {
+  margin-right: 0.6em;
+  cursor: pointer;
+  color: #2E2F30;
+}
