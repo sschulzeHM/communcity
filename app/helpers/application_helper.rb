@@ -18,7 +18,7 @@ module ApplicationHelper
   def state_label_class state
     case state
       when Project::STATE[:DONE] then
-        "label labelsuccess"
+        "label label-success"
       when Project::STATE[:UPCOMING ]then
         "label label-info"
       when Project::STATE[:IN_PROGRESS ]then

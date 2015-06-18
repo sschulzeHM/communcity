@@ -1,2 +1,1 @@
-<!--TODO: make pretty-->
-<li><%= link_to concat_username(user), controller: "profiles", action: "show_user", id: user %></li>
+<li><%= image_tag "default-avatar.jpg", class:["img-circle", "avatar-tiny"] %><%= link_to concat_username(user), controller: "profiles", action: "show_user", id: user %></li>

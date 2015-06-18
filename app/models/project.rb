@@ -10,7 +10,6 @@ class Project < ActiveRecord::Base
   end
 
   def duration
-    #should be prettier
     TimeDifference.between(date_from, date_to).in_hours
   end
 
@@ -21,6 +20,21 @@ class Project < ActiveRecord::Base
     self.score += users.size*10
   end
 
+  #set status to done and add score to users
+  def set_done
+    ActiveRecord::Base.transaction do
+      done = true
+      users.each do |u|
+        tmp_score = u.score || 0
+        tmp_score+= score
+        u.score = tmp_score
+        #eh... should probably abort if a save fails...
+        u.save
+      end
+      save
+    end
+  end
+
   def has_user?(user)
     user.in? self.users
   end
@@ -29,20 +43,33 @@ class Project < ActiveRecord::Base
     has_user?(current_user)
   end
 
-  def places_left
-    max_users - users.size
-  end
-
   def has_room?
     #should obviously compare to a cached value in reality
     users.size < max_users
   end
 
+  def places_left
+    max_users - users.size
+  end
+
+  def percentage_filled
+    unless (max_users.nil? or max_users === 0) then
+      ((users.size.to_f/max_users)*100)
+    else
+      0
+    end
+  end
+
+
   def state
-      return STATE[:DONE] if done
-      return STATE[:UPCOMING ]if Time.now < date_from
-      return STATE[:IN_PROGRESS ]if Time.now < date_to
-      return STATE[:OVER]
+    return STATE[:DONE] if done
+    return STATE[:UPCOMING] if Time.now < date_from
+    return STATE[:IN_PROGRESS] if Time.now < date_to
+    return STATE[:OVER]
+  end
+
+  def has_state? state
+    state === self.state
   end
 
   def joinable?(user)
