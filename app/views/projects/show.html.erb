@@ -1,4 +1,4 @@
-<h1><%= @project.name %></h1>
+<h1><%= @project.name %><span class="<%= state_label_class @project.state%>"><%=@project.state%></span></h1>
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Informationen</div>
@@ -11,6 +11,10 @@
     <li class="list-group-item">
       <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
       <span class="sr-only">Verantalter: </span> <%= link_to @project.organisation.name, controller: "profiles", action: "show_organisation", id: @project.organisation %>
+    </li>
+    <li class="list-group-item">
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+      <span class="sr-only">Start: </span> <%= @project.date_from %>
     </li>
     <li class="list-group-item">
       <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
@@ -29,7 +33,7 @@
   <p><%= @project.description %></p>
 </div>
 <div>
-  <h2>Wer ist dabei</h2>
+  <h2>Wer ist dabei <small><%= remaining_places_text @project %></small></h2>
   <% if @project.users.empty? %>
       <p>Noch Niemand :(</p>
   <% else %>
@@ -39,7 +43,7 @@
   <% end %>
   <% if user_signed_in? %>
       <% unless @project.has_user?(current_user) %>
-          <%= button_to "Mitmachen", add_project_path, method: :post, class: ["btn", "btn-success", "btn-lg"] %>
+          <%= button_to "Jetzt Mitmachen", add_project_path, method: :post, class: ["btn", "btn-success", "btn-lg"] if @project.joinable? current_user %>
       <% else %>
           <%= button_to "Keine Lust mehr...", remove_project_path, method: :delete, class: ["btn", "btn-danger", "btn-lg"] %>
       <% end %>

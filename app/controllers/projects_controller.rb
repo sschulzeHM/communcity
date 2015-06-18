@@ -64,7 +64,7 @@ class ProjectsController < ApplicationController
 
   def add
 
-    @project.users << current_user if current_user and not @project.has_user?(current_user)
+    @project.users << current_user if current_user and @project.joinable? current_user
     respond_to do |format|
       if @project.save
       format.html { redirect_to @project, notice: "Du bist jetzt dabei!"}
@@ -97,6 +97,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params[:project].permit(:name, :location, :date_from, :date_to, :description, :category)
+      params[:project].permit(:name, :location, :date_from, :date_to, :description, :category, :max_users)
     end
 end
