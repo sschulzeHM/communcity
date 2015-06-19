@@ -13,7 +13,6 @@
             var initialzoom = zoomlevels[minVal];
             var markerHome;
             var iconBaseProjects = 'http://maps.google.com/mapfiles/kml/paddle/';
-            var iconBaseHome = 'http://maps.google.com/mapfiles/kml/shapes/';
             var geocoder;
 
             function initialize() {
@@ -216,13 +215,20 @@
             /*Pressing the Enter key in TagInputField*/
 
             $("#taginput").bind("enterKey", function (e) {
-                $("#taglabels").append("<span class='label label-success'>" + $("#taginput").val() + "<span class='removespan'>x</span></span> ");
+                $("#taglabels").append("<span class='label taglabel'>" + $("#taginput").val() + "<span class='removespan'>x</span></span> ");
                 $("#taginput").val("")
             });
             $("#taginput").keyup(function (e) {
                 if (e.keyCode == 13) {
                     $(this).trigger("enterKey");
                 }
+            });
+
+            $(document).on('click', '#datepicker1click', function () {
+                $("#datepicker1").datepicker("show");
+            });
+            $(document).on('click', '#datepicker2click', function () {
+                $("#datepicker2").datepicker("show");
             });
 
             $(document).on('click', '.removespan', function () {
@@ -246,7 +252,7 @@
     <div id="filters">
       <!--MyLocation-->
       <div class="input-group input-group-sm" id="location">
-    <span class="input-group-addon" id="locationclick">
+    <span class="input-group-addon clickimage" id="locationclick">
       <span id="getlocation" class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
 
     </span>
@@ -259,7 +265,7 @@
       km
 
       <div class="input-group input-group-sm" id="tags">
-    <span class="input-group-addon" id="sizing-addon3">
+    <span class="input-group-addon" id="addtagclick">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 
     </span>
@@ -272,7 +278,7 @@
       <div id="DateRange">
 
         <div class="input-group input-group-sm">
-    <span class="input-group-addon" id="sizing-addon3">
+    <span class="input-group-addon clickimage" id="datepicker1click">
       <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 
     </span>
@@ -280,7 +286,7 @@
         </div>
 
         <div class="input-group input-group-sm">
-    <span class="input-group-addon" id="sizing-addon3">
+    <span class="input-group-addon clickimage" id="datepicker2click">
       <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 
     </span>

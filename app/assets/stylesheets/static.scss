@@ -90,10 +90,15 @@ div.ui-datepicker{
   margin-left: 0.6em;
   cursor: pointer;
   color: #2E2F30;
+  font-weight: normal;
 }
-#getlocation {
+.clickimage {
   cursor: pointer;
 }
-#locationclick:active {
+.clickimage:active {
   background-color: #CCCCCC;
+}
+.taglabel {
+  background-color: #EEEEEE;
+  color: #2E2F30;
 }
