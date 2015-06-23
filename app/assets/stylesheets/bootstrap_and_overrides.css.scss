@@ -4,5 +4,40 @@
 @import "static";
 @import "profiles";
 
+body{
+  font-size: 16px;
+  font-family: "Droid Serif";
+}
 
+
+h1, h2, h3, h4, h5, h6{
+  //looks like the font does not support capitalize, no "Kapitälchen" included
+  text-transform: uppercase;
+}
+
+h1{
+  font-size: 48px;
+}
+
+.in-text-heading{
+  font-size: 20px;
+}
+
+.highlight{
+  color: #FFDF0F;
+}
+
+a{
+  color: #2271BB;
+}
+
+a:visited{
+  color: #004C8E;
+}
+
+.banner-stub{
+  width: 100%;
+  height: 150px;
+  background: lightgrey;
+}
 
