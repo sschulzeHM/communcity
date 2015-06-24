@@ -8,11 +8,11 @@ $marginbetweenfilters: 1.5em;
   border: 1px solid $bordersearch;
 }
 .widthout {
-  width: 15em;
+  width: 25%;
   padding: 1em;
 }
 .widthin {
-  width: 40em;
+  width: 50%;
 }
 #map-canvas {
   border-bottom: 1px solid $bordersearch;
@@ -101,4 +101,12 @@ div.ui-datepicker{
 .taglabel {
   background-color: #EEEEEE;
   color: #2E2F30;
+}
+
+#video {
+  border: 1px solid black;
+  margin-bottom: 2em;
+  text-align: center;
+  height: 10em;
+
 }
