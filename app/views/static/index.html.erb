@@ -25,6 +25,7 @@
                 var mapOptions = {
                     //center: new google.maps.LatLng(48.153858, 11.557649),
                     zoom: initialzoom,
+                    zoomControl: false,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 }
                 map = new google.maps.Map(mapCanvas, mapOptions);
@@ -318,15 +319,15 @@
     <div class="listProject">
       <div class="bold">Projekt 1: Kindergarten</div>
       <div class="italic">Mit Kindern im Kindergarten spielen.</div>
-      <div class="scorePoints">ScorePoints: 100</div>
-      <a href="#">weitere Infos</a>
+      <div class="scorePoints">ScorePoints: <%= Project.where(id:2).pluck(:score) %></div>
+      <%= link_to "weitere Infos", project_path(2) %>
     </div>
 
     <div class="listProject">
       <div class="bold">Projekt 2: DHZ München</div>
       <div class="italic">Spielenachmittag mit herzkranken Menschen.</div>
-      <div class="scorePoints">ScorePoints: 150</div>
-      <a href="#">weitere Infos</a>
+      <div class="scorePoints">ScorePoints: <%= Project.where(id:1).pluck(:score) %></div>
+      <%= link_to "weitere Infos", project_path(1) %>
     </div>
 
   </div>
