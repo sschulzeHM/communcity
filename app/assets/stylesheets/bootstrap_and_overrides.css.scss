@@ -15,10 +15,6 @@ h1, h2, h3, h4, h5, h6{
   text-transform: uppercase;
 }
 
-h1{
-  font-size: 48px;
-}
-
 .in-text-heading{
   font-size: 20px;
 }
@@ -35,9 +31,30 @@ a:visited{
   color: #004C8E;
 }
 
-.banner-stub{
+h1{
+  font-size: 40px;
+}
+
+.project-banner{
+  position: relative;
   width: 100%;
-  height: 150px;
+  height: 200px;
   background: lightgrey;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .title{
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    color: white;
+    text-shadow: 2px 2px 2px black, -2px -2px 2px black;
+  }
 }
 
