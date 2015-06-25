@@ -9,6 +9,7 @@ body{
   font-family: "Droid Serif";
 }
 
+$maxfontsize: 40px;
 
 h1, h2, h3, h4, h5, h6{
   //looks like the font does not support capitalize, no "Kapitälchen" included
@@ -32,7 +33,7 @@ a:visited{
 }
 
 h1{
-  font-size: 40px;
+  font-size: $maxfontsize;
 }
 
 .project-banner{
@@ -66,5 +67,14 @@ h1{
 .affix-spacer{
   display: none;
   height: 50px;
+}
+
+hr{
+  border-style: dashed;
+}
+
+.btn-gigantic{
+  width: 100%;
+  font-size: $maxfontsize;
 }
 

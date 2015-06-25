@@ -404,6 +404,16 @@
     <%= render partial: "projects/user", collection: @top_users %>
   </ul>
 </div>
+<% unless signed_in?%>
+<hr>
+<div id="signup-large">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <%= link_to "Jetzt Mitmachen!", new_user_registration_path, class:["btn","btn-success", "btn-gigantic"] %>
+    </div>
+  </div>
+ <% end%>
+</div>
 
 
 
