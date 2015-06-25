@@ -4,8 +4,12 @@
 $bordersearch: #CCCCCC;
 $marginbetweenfilters: 1.5em;
 
+
 .border1pxsolidgrey {
   border: 1px solid $bordersearch;
+  &.col-md-3{
+    padding: 14px;
+  }
 }
 .widthout {
   width: 25%;
@@ -24,7 +28,7 @@ $marginbetweenfilters: 1.5em;
 }
 #static {
   margin: auto;
-  width: 70em;
+  //width: 70em;
 
 }
 .listProject {
