@@ -17,6 +17,7 @@
         <li> <%= link_to  "Alle Projekte", projects_path%> </li>
         <li> <a href="#">Partner </a></li>
         <li><a href="#">Spenden</a></li>
+        <%= yield :navitems %>
       </ul>
        <%= render "layouts/sign_in" %>
     </div><!-- /.navbar-collapse -->

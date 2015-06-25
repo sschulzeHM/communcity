@@ -1,11 +1,13 @@
 <% content_for :head do %>
 
+    <!-- Include Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry"></script>
 
     <script>
-
+        // wait for document to be ready
         $(document).ready(function () {
 
+            // init global vars
             var map;
             var minVal = "0";
             var zoomlevels = [15, 14, 10, 9, 8];
@@ -19,8 +21,10 @@
 
             function initialize() {
 
+                // init Geocoder: Translates Location 2 LatLng
                 geocoder = new google.maps.Geocoder();
 
+                // init Map
                 var mapCanvas = document.getElementById('map-canvas');
                 var mapOptions = {
                     //center: new google.maps.LatLng(48.153858, 11.557649),
@@ -30,7 +34,7 @@
                 }
                 map = new google.maps.Map(mapCanvas, mapOptions);
 
-                // Try HTML5 geolocation
+                // get location HTML5
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(function (position) {
                         latlng = new google.maps.LatLng(position.coords.latitude,
@@ -40,6 +44,7 @@
                             $('#locationinput').val(results[1].formatted_address);
                         });
 
+                        // set home marker
                         setHomeMarker();
 
                     }, function () {
@@ -50,9 +55,11 @@
                     handleNoGeolocation(false);
                 }
 
+                // set project markers into map
                 setMarkers();
             }
 
+            // what if any error in getting the location occurs
             function handleNoGeolocation(errorFlag) {
                 if (errorFlag) {
                     var content = 'Error: Ortungsfunktion fehlgeschlegen. Bitte Standort manuell eingeben.';
@@ -71,6 +78,7 @@
 
             }
 
+            // function to set project markers
             function setMarkers() {
 
                 var markerP1 = new google.maps.Marker({
@@ -104,32 +112,38 @@
 
             }
 
+            // function that calculates the distance between two LatLng
             function calcDistance(fromLatLng, toLatLng) {
                 return (google.maps.geometry.spherical.computeDistanceBetween(fromLatLng, toLatLng) / 1000).toFixed(2);
             }
 
             google.maps.event.addDomListener(window, 'load', initialize);
 
+
+            // what happens when "enter" in location input field
             $("#locationinput").bind("enterKey", function (e) {
 
+                //get value from location input
                 geocoder.geocode({'address': $("#locationinput").val()}, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         latlng = new google.maps.LatLng(results[0].geometry.location.lat(),
                                 results[0].geometry.location.lng());
-
+                        // set home marker
                         setHomeMarker();
-
+                        // location not found
                     } else {
                         alert("Die Eingabe \'" + $("#locationinput").val() + "\' liefert kein Ergebnis! \n Fehlercode: " + status);
                     }
                 });
             });
+            //keyup enter for location input
             $("#locationinput").keyup(function (e) {
                 if (e.keyCode == 13) {
                     $(this).trigger("enterKey");
                 }
             });
 
+            // function that returns the current location HTML5
             function getCurrentLocation() {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     latlng = new google.maps.LatLng(position.coords.latitude,
@@ -138,12 +152,13 @@
                     geocoder.geocode({'location': latlng}, function (results, status) {
                         $('#locationinput').val(results[1].formatted_address);
                     });
-
+                    // set home marker
                     setHomeMarker();
 
                 });
             }
 
+            // function that sets the home marker
             function setHomeMarker() {
 
                 if (markerHome != undefined) {
@@ -163,19 +178,22 @@
 
             }
 
+            // click on the location icon
             $(document).on('click', '#getlocation', function () {
                 getCurrentLocation();
             });
 
-
+            // slider for location
             $("#slider-1").slider({
                         range: "min",
                         min: 0,
                         max: zoomlevels.length - 1,
                         value: minVal,
+                        // set map zoom when slider stops
                         stop: function (event, ui) {
                             map.setZoom(zoomlevels[ui.value]);
                         },
+                        // place value
                         slide: function (event, ui) {
                             if (ui.value < minVal)
                                 return false;
@@ -183,8 +201,15 @@
                         }
                     }
             );
+            // place value
             $("#km").text(kmdisplay[minVal]);
 
+            /*google.maps.event.addListener(map, 'zoom_changed', function() {
+             //zoomLevel = map.getZoom();
+             // Change slider when Zoom changes on Map
+             });*/
+
+            // double slider for score points
             $("#slider-2").slider({
                 range: true,
                 min: 0,
@@ -198,9 +223,11 @@
                     $("#SP2").text(ui.values[1]);
                 }
             });
+            // place slider text
             $("#SP1").text($("#slider-2").slider("values", 0));
             $("#SP2").text($("#slider-2").slider("values", 1));
 
+            // datepickers
             $("#datepicker1").datepicker({
                 changeMonth: true,
                 changeYear: true,
@@ -212,9 +239,9 @@
                 dateFormat: "dd.mm.yy"
             });
 
-            /*Pressing the Enter key in TagInputField*/
-
+            // Pressing the Enter key in TagInputField
             $("#taginput").bind("enterKey", function (e) {
+                // add tag under input field
                 $("#taglabels").append("<span class='label taglabel'>" + $("#taginput").val() + "<span class='removespan'>x</span></span> ");
                 $("#taginput").val("")
             });
@@ -224,6 +251,7 @@
                 }
             });
 
+            // click on datepicker icon
             $(document).on('click', '#datepicker1click', function () {
                 $("#datepicker1").datepicker("show");
             });
@@ -231,6 +259,7 @@
                 $("#datepicker2").datepicker("show");
             });
 
+            // function to remove tags from search
             $(document).on('click', '.removespan', function () {
                 $(this).parent().remove();
             });
@@ -240,6 +269,19 @@
     </script>
 
 <% end %>
+<% content_for :navitems do%>
+    <li> <a href="#static">Suche </a></li>
+    <li><a href="#top-projects">Top Projekte</a></li>
+    <li><a href="#top-users">Top Helfer</a></li>
+<% end %>
+
+<div id="video" class="row">
+
+  <video width="100%" height="300" autoplay loop muted poster="assets/communcity-explainer-poster.jpg">
+    <source src="assets/communcity-explainer.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
 
 
 <div id="static">
@@ -261,6 +303,7 @@
       <div id="km"></div>
       km
 
+      <!--Tags-->
       <div class="input-group input-group-sm" id="tags">
     <span class="input-group-addon" id="addtagclick">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -272,6 +315,8 @@
       <div id="taglabels">
       </div>
 
+
+      <!--Datepickers-->
       <div id="DateRange">
 
         <div class="input-group input-group-sm">
@@ -292,6 +337,7 @@
 
       </div>
 
+      <!--ScoreSlider-->
       <div id="SPSlider">
         ScorePoints:
         <div id="SP1" class="SP"></div>
@@ -301,10 +347,13 @@
       </div>
     </div>
 
+    <!--Legend for projects an location-->
+
     <div id="legend">
 
       <div class="legendItem"><%= image_tag "red-circle-lv.png" %> Mein Standort</div>
-      <div class="legendItem"><%= image_tag "ylw-circle-lv.png" %> Projekte <span class="badge"><%= Project.count(:id) %></span></div>
+      <div class="legendItem"><%= image_tag "ylw-circle-lv.png" %> Projekte
+        <span class="badge"><%= Project.count(:id) %></span></div>
 
     </div>
 
@@ -319,14 +368,14 @@
     <div class="listProject">
       <div class="bold">Projekt 1: Kindergarten</div>
       <div class="italic">Mit Kindern im Kindergarten spielen.</div>
-      <div class="scorePoints">ScorePoints: <%= Project.where(id:2).pluck(:score) %></div>
+      <div class="scorePoints">ScorePoints: <%= Project.where(id: 2).pluck(:score) %></div>
       <%= link_to "weitere Infos", project_path(2) %>
     </div>
 
     <div class="listProject">
       <div class="bold">Projekt 2: DHZ München</div>
       <div class="italic">Spielenachmittag mit herzkranken Menschen.</div>
-      <div class="scorePoints">ScorePoints: <%= Project.where(id:1).pluck(:score) %></div>
+      <div class="scorePoints">ScorePoints: <%= Project.where(id: 1).pluck(:score) %></div>
       <%= link_to "weitere Infos", project_path(1) %>
     </div>
 
@@ -334,10 +383,23 @@
 
 </div>
 
+<div class="clearfix"></div>
 
 
-<div class="clear"></div>
-
+<hr>
+<div id="top-projects">
+  <h2>Top Projekte</h2>
+  <div class="row">
+    <%= render partial: "projects/project", collection: @top_projects %>
+  </div>
+</div>
+<hr>
+<div id="top-users">
+  <h2>Top Helfer</h2>
+  <ul class="list-inline">
+    <%= render partial: "projects/user", collection: @top_users %>
+  </ul>
+</div>
 
 
 

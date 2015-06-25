@@ -73,7 +73,8 @@
       <% end %>
   <% end %>
   <% if organisation_signed_in? %>
-      <%= button_to "Projekt abschließen", done_project_path, class: ["btn", "btn-success", "btn-lg"] unless @project.has_state? Project::STATE[:DONE] %>
+        <%= link_to "Projekt abschließen", done_project_path, class: ["btn", "btn-success", "btn-lg"], method: :post unless @project.has_state? Project::STATE[:DONE] %>
+        <%= link_to "Projekt editieren", edit_project_path(@project), class: ["btn", "btn-primary", "btn-lg"] , method: :get%>
   <% end %>
   </div>
 
