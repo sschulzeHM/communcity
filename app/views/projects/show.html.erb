@@ -73,7 +73,7 @@
       <% end %>
   <% end %>
   <% if organisation_signed_in? %>
-      <%= button_to "Projekt abschließen", done_project_path, class: ["btn", "btn-success", "btn-lg"] %> <%#if @project.has_state? Project::STATE[:OVER] %>
+      <%= button_to "Projekt abschließen", done_project_path, class: ["btn", "btn-success", "btn-lg"] unless @project.has_state? Project::STATE[:DONE] %>
   <% end %>
   </div>
 
