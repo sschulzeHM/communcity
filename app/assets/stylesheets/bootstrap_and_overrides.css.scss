@@ -78,3 +78,10 @@ hr{
   font-size: $maxfontsize;
 }
 
+.logo{
+  background-image: asset_url("logo.png");
+  background-repeat: no-repeat;
+  background-size:  65px auto;
+  padding-left: 50px;
+}
+

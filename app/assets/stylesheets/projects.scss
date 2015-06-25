@@ -2,14 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .navbar-default .navbar-brand{
-  &.weak-brand{
-    font-weight: 100;
-  }
 
   &.strong-brand{
-    color: green;
     font-weight: 800;
-
+    font-size: 25px;
+    font-style: italic;
+    color: black;
+    text-shadow: 1px 1px 1px white, 1px -1px 1px white, -1px -1px 1px white, -1px 1px 1px white;
   }
 }
 

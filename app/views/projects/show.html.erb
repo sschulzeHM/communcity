@@ -67,7 +67,7 @@
         </div>
     <% end %>
   </div>
-  <div class="cold-md-4">
+  <div class="col-md-4">
     <% if user_signed_in? %>
         <% unless @project.has_user?(current_user) %>
             <%= button_to "Jetzt Mitmachen", add_project_path, method: :post, class: ["btn", "btn-success", "btn-lg"] if @project.joinable? current_user %>
