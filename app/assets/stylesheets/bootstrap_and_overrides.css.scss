@@ -58,3 +58,13 @@ h1{
   }
 }
 
+.affix{
+  width: 100%;
+  z-index: 1000;
+}
+
+.affix-spacer{
+  display: none;
+  height: 50px;
+}
+
