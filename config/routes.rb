@@ -10,13 +10,14 @@ Rails.application.routes.draw do
 
   get 'static/index'
 
-  resources :projects
+  #resources :projects
   devise_for :organisations
   devise_for :users
 
-  get 'users/:id' => "profiles#show_user"
-
-  get 'organisations/:id' => "profiles#show_organisation"
+  resources :users, only: :show
+  resources :organisations, only: :show
+  #get 'user/show/:id' => "profiles#show_user"
+  #get 'organisation/show/:id' => "profiles#show_organisation"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
