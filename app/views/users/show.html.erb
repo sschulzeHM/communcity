@@ -1,7 +1,7 @@
 <h1><%= concat_username @user %></h1>
 <div class="row">
   <div class="col-md-2">
-        <%= image_tag "default-avatar.jpg", class: "img-thumbnail" %>
+    <%= image_tag "default-avatar.jpg", class: "img-thumbnail" %>
   </div>
   <div class="col-md-10">
     <div class="panel panel-default">
@@ -9,23 +9,42 @@
       <div class="panel-heading">Informationen</div>
       <!-- List group -->
       <ul class="list-group">
-        <li class="list-group-item"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="sr-only">Ort: </span> <%= @user.location%></li>
-        <li class="list-group-item"><span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="sr-only">Prestige: </span> <%= @user.score %></li>
+        <li class="list-group-item">
+          <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="sr-only">Ort: </span> <%= @user.location %>
+        </li>
+        <li class="list-group-item">
+          <span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="sr-only">Prestige: </span> <%= @user.score %>
+        </li>
       </ul>
     </div>
   </div>
 </div>
 <div class="row">
-
-  <h2>Meine Projekte</h2>
-  <% if @user.projects.empty? %>
+  <div class="col-md-12">
+    <h2>Meine abgeschlossenen Projekte</h2>
+    <% if @user.done_projects.empty? %>
+        <p>Noch Keine :(</p>
+    <% else %>
+        <div>
+          <ul class="list-unstyled">
+            <%= render partial: "profiles/project", collection: @user.done_projects %>
+          </ul>
+        </div>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+  <h2>Meine aktuellen Projekte</h2>
+  <% if @user.current_projects.empty? %>
       <p>Noch Keine :(</p>
-  <% else%>
+  <% else %>
       <div>
         <ul class="list-unstyled">
-          <%= render partial: "profiles/project", collection: @user.projects%>
+          <%= render partial: "profiles/project", collection: @user.current_projects %>
         </ul>
       </div>
-  <% end%>
+  <% end %>
+</div>
 </div>
 

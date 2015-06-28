@@ -270,7 +270,7 @@
 
 <% end %>
 <% content_for :navitems do%>
-    <li> <a href="#static">Suche </a></li>
+    <li> <a href="#static">Projekte entdecken </a></li>
     <li><a href="#top-projects">Top Projekte</a></li>
     <li><a href="#top-users">Top Helfer</a></li>
 <% end %>
@@ -286,6 +286,7 @@
 
 
 <div id="static" class="row">
+    <h2>Projekte entdecken</h2>
   <div class="col-md-3 border1pxsolidgrey staticheight">
       <!-- Filter -->
       <!--<div class="floatleft border1pxsolidgrey widthout staticheight">-->
@@ -393,9 +394,7 @@
 <hr>
 <div id="top-projects">
   <h2>Top Projekte</h2>
-  <div class="row">
-    <%= render partial: "projects/project", collection: @top_projects %>
-  </div>
+    <%= render partial: "project_carousel", locals: {projects: @top_projects} %>
 </div>
 <hr>
 <div id="top-users">

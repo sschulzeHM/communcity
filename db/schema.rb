@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150617114305) do
+ActiveRecord::Schema.define(version: 20150627110213) do
 
   create_table "organisations", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150617114305) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "name"
-    t.integer  "score",                  default: 0,  null: false
+    t.integer  "score"
     t.string   "location"
     t.float    "longitude"
     t.float    "latitude"
@@ -47,16 +47,17 @@ ActiveRecord::Schema.define(version: 20150617114305) do
     t.string   "location"
     t.date     "date_from"
     t.date     "date_to"
-    t.integer  "score",           default: 0,     null: false
+    t.integer  "score"
     t.text     "description"
     t.string   "category"
     t.float    "longitude"
     t.float    "latitude"
     t.integer  "organisation_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "max_users",       default: 1,     null: false
-    t.boolean  "done",            default: false, null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+    t.integer  "max_users",       default: 1,                            null: false
+    t.boolean  "done",            default: false,                        null: false
+    t.string   "banner_url",      default: "banners/banner_default.jpg"
   end
 
   create_table "projects_users", id: false, force: :cascade do |t|
@@ -77,9 +78,10 @@ ActiveRecord::Schema.define(version: 20150617114305) do
     t.string   "last_sign_in_ip"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "score",                  default: 0,  null: false
+    t.integer  "score"
     t.string   "location"
-    t.integer  "integer"
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
