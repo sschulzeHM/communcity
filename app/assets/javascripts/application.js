@@ -15,4 +15,5 @@
 //= require jquery-ui
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require affix-fix.js
 // require_tree .

@@ -2,8 +2,12 @@ class Project < ActiveRecord::Base
   belongs_to :organisation
   has_and_belongs_to_many :users
   before_save :calc_score
+  #should probably be a config var
+  BANNER_DIR = 'banners/'
+  STATE = {UPCOMING: "Kommt bald", IN_PROGRESS: "Läuft", OVER: "Vorbei", DONE: "Abgeschlossen"}
 
-  STATE = {UPCOMING: "Upcoming", IN_PROGRESS: "In Progress", OVER: "Over", DONE: "Done"}
+  scope :done, -> { where(done: true)}
+
 
   def self.by_date
     Project.all.order(date_from: :desc)
@@ -35,6 +39,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def create_banner_url
+    "#{BANNER_DIR}banner_#{organisation.id}_#{id}.jpg"
+  end
+
   def has_user?(user)
     user.in? self.users
   end
@@ -59,7 +67,6 @@ class Project < ActiveRecord::Base
       0
     end
   end
-
 
   def state
     return STATE[:DONE] if done

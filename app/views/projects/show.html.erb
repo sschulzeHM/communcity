@@ -1,7 +1,7 @@
-<div class="banner-stub">
-  <h1>nice banner here</h1>
+<div class="project-banner">
+  <%= image_tag @project.banner_url %>
+  <h1 class="title"><%= @project.name %></h1>
 </div>
-<h1><%= @project.name %></h1>
 <div class="panel panel-default">
   <!-- Default panel contents -->
   <div class="panel-heading">Informationen</div>
@@ -17,7 +17,7 @@
         <li class="list-group-item">-->
         <div class="col-md-4">
           <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-          <span class="sr-only">Verantalter: </span> <%= link_to @project.organisation.name, controller: "profiles", action: "show_organisation", id: @project.organisation %>
+          <span class="sr-only">Verantalter: </span> <%= link_to @project.organisation.name, organisation_path(@project.organisation) %>
         </div>
         <div class="col-md-4">
           <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -45,40 +45,50 @@
   </ul>
 </div>
 
-<div>
-  <h2>Um was geht's?</h2>
+<div class="row">
+  <div class="col-md-8">
+    <h2>Um was geht's?</h2>
 
-  <p><%= @project.description %></p>
-</div>
-<div>
-  <h2>Wer ist dabei</h2>
-  <% if @project.users.empty? %>
-      <p>Noch Niemand :(</p>
-  <% else %>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="<%= @project.percentage_filled %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @project.percentage_filled%>%">
+    <p><%= @project.description %></p>
 
+    <h2>Wer ist dabei</h2>
+    <% if @project.users.empty? %>
+        <p>Noch Niemand :(</p>
+    <% else %>
+        <ul class="list-inline">
+          <%= render partial: "user", collection: @project.users %>
+        </ul>
+        <h2>Belegte Plätze</h2>
+
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= @project.percentage_filled %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @project.percentage_filled%>%">
+
+          </div>
         </div>
-      </div>
-      </div>
-      <ul class="list-inline">
-        <%= render partial: "user", collection: @project.users %>
-      </ul>
-  <% end %>
-  <% if user_signed_in? %>
-      <% unless @project.has_user?(current_user) %>
-          <%= button_to "Jetzt Mitmachen", add_project_path, method: :post, class: ["btn", "btn-success", "btn-lg"] if @project.joinable? current_user %>
-      <% else %>
-          <%= button_to "Keine Lust mehr...", remove_project_path, method: :delete, class: ["btn", "btn-danger", "btn-lg"] %>
-      <% end %>
-  <% end %>
-  <% if organisation_signed_in? %>
-      <%= button_to "Projekt abschließen", done_project_path, class: ["btn", "btn-success", "btn-lg"] %> <%#if @project.has_state? Project::STATE[:OVER] %>
-      <%= button_to "Projekt editieren", edit_project_path(@project), class: ["btn", "btn-success", "btn-lg"] , method: :get%> <%#if @project.has_state? Project::STATE[:OVER] %>
-  <% end %>
+    <% end %>
   </div>
+  <div class="col-md-4">
+    <% if user_signed_in? %>
+        <% unless @project.has_user?(current_user) %>
+            <%= button_to "Jetzt Mitmachen", add_project_path, method: :post, class: ["btn", "btn-success", "btn-lg"] if @project.joinable? current_user %>
+        <% else %>
+            <%= button_to "Keine Lust mehr...", remove_project_path, method: :delete, class: ["btn", "btn-danger", "btn-lg"] %>
+        <% end %>
+    <% elsif organisation_signed_in? %>
+        <%= link_to "Projekt abschließen", done_project_path, class: ["btn", "btn-success", "btn-lg"], method: :post unless @project.has_state? Project::STATE[:DONE] %>
+        <%= link_to "Projekt editieren", edit_project_path(@project), class: ["btn", "btn-primary", "btn-lg"], method: :get %>
+    <% else %>
+        <%= link_to "Jetzt Mitmachen", new_user_registration_path, class: ["btn", "btn-success", "btn-lg"] %>
+    <% end %>
+    <div>
+      <h2>Aktivität</h2>
 
-  <!--
+      <p>next sprint... maybe</p>
+    </div>
+  </div>
+</div>
+
+<!--
 <%= link_to 'Edit', edit_project_path(@project) %>
 <%= link_to 'Back', projects_path %>
 -->

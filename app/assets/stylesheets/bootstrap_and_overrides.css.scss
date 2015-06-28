@@ -9,14 +9,11 @@ body{
   font-family: "Droid Serif";
 }
 
+$maxfontsize: 40px;
 
 h1, h2, h3, h4, h5, h6{
   //looks like the font does not support capitalize, no "Kapitälchen" included
   text-transform: uppercase;
-}
-
-h1{
-  font-size: 48px;
 }
 
 .in-text-heading{
@@ -35,9 +32,60 @@ a:visited{
   color: #004C8E;
 }
 
-.banner-stub{
+h1{
+  font-size: $maxfontsize;
+}
+
+.project-banner{
+  position: relative;
   width: 100%;
-  height: 150px;
+  height: 200px;
   background: lightgrey;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .title{
+    position: absolute;
+    top: 0px;
+    left: 20px;
+    color: white;
+    text-shadow: 2px 2px 2px black, -2px -2px 2px black;
+  }
+}
+
+.affix{
+  width: 100%;
+  z-index: 1000;
+}
+
+.affix-spacer{
+  display: none;
+  height: 50px;
+}
+
+hr{
+  border-style: dashed;
+}
+
+.btn-gigantic{
+  width: 100%;
+  font-size: $maxfontsize;
+}
+
+.logo{
+  background-image: asset_url("logo.png");
+  background-repeat: no-repeat;
+  background-size:  65px auto;
+  padding-left: 50px;
+}
+
+#top-project-carousel .carousel-inner{
+  overflow: visible;
 }
 

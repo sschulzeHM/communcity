@@ -1,0 +1,13 @@
+<div id=top-project-carousel class="carousel slide" data-ride="carousel">
+  <% first = true %>
+      <div class="carousel-inner" role="listbox">
+        <% projects.in_groups_of(3, false) { |group| %>
+            <div class="item <%= "active" if first %>">
+              <% first=false %>
+              <div class="row">
+                <%= render partial: "projects/project", collection: group %>
+              </div>
+            </div>
+        <% } %>
+      </div>
+</div>

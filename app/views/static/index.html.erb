@@ -130,7 +130,7 @@
                                 results[0].geometry.location.lng());
                         // set home marker
                         setHomeMarker();
-                    // location not found
+                        // location not found
                     } else {
                         alert("Die Eingabe \'" + $("#locationinput").val() + "\' liefert kein Ergebnis! \n Fehlercode: " + status);
                     }
@@ -177,6 +177,7 @@
                 map.setZoom(initialzoom);
 
             }
+
             // click on the location icon
             $(document).on('click', '#getlocation', function () {
                 getCurrentLocation();
@@ -204,9 +205,9 @@
             $("#km").text(kmdisplay[minVal]);
 
             /*google.maps.event.addListener(map, 'zoom_changed', function() {
-                //zoomLevel = map.getZoom();
-                // Change slider when Zoom changes on Map
-            });*/
+             //zoomLevel = map.getZoom();
+             // Change slider when Zoom changes on Map
+             });*/
 
             // double slider for score points
             $("#slider-2").slider({
@@ -268,107 +269,126 @@
     </script>
 
 <% end %>
+<% content_for :navitems do%>
+    <li> <a href="#static">Projekte entdecken </a></li>
+    <li><a href="#top-projects">Top Projekte</a></li>
+    <li><a href="#top-users">Top Helfer</a></li>
+<% end %>
 
 <div id="video" class="row">
+<<<<<<< HEAD
 
   <video width="100%" height="300" autoplay muted poster="assets/communcity-explainer-poster.jpg">
     <source src="assets/communcity-explainer.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
+=======
+    <div class="col-md-12">
+      <video width="100%" height="300" autoplay loop muted poster="assets/communcity-explainer-poster.jpg">
+        <source src="assets/communcity-explainer.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+>>>>>>> d164e0d43f2e9f5cf91334262fbcda9ae5866b43
 </div>
 
 
-<div id="static">
+<div id="static" class="row">
+    <h2>Projekte entdecken</h2>
+  <div class="col-md-3 border1pxsolidgrey staticheight">
+      <!-- Filter -->
+      <!--<div class="floatleft border1pxsolidgrey widthout staticheight">-->
+        <div id="filters">
+          <!--MyLocation-->
+          <div class="input-group input-group-sm" id="location">
+        <span class="input-group-addon clickimage" id="locationclick">
+          <span id="getlocation" class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
 
-  <!-- Filter -->
-  <div class="floatleft border1pxsolidgrey widthout staticheight">
-    <div id="filters">
-      <!--MyLocation-->
-      <div class="input-group input-group-sm" id="location">
-    <span class="input-group-addon clickimage" id="locationclick">
-      <span id="getlocation" class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+        </span>
+            <input id="locationinput" type="text" class="form-control" placeholder="Mein Standort" aria-describedby="sizing-addon3">
+          </div>
 
-    </span>
-        <input id="locationinput" type="text" class="form-control" placeholder="Mein Standort" aria-describedby="sizing-addon3">
-      </div>
+          <div id="slider-1" class="slider"></div>
+          Umkreis:
+          <div id="km"></div>
+          km
 
-      <div id="slider-1" class="slider"></div>
-      Umkreis:
-      <div id="km"></div>
-      km
+          <!--Tags-->
+          <div class="input-group input-group-sm" id="tags">
+        <span class="input-group-addon" id="addtagclick">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 
-      <!--Tags-->
-      <div class="input-group input-group-sm" id="tags">
-    <span class="input-group-addon" id="addtagclick">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </span>
+            <input id="taginput" type="text" class="form-control" placeholder="Tags" aria-describedby="sizing-addon3">
+          </div>
 
-    </span>
-        <input id="taginput" type="text" class="form-control" placeholder="Tags" aria-describedby="sizing-addon3">
-      </div>
-
-      <div id="taglabels">
-      </div>
+          <div id="taglabels">
+          </div>
 
 
-      <!--Datepickers-->
-      <div id="DateRange">
+          <!--Datepickers-->
+          <div id="DateRange">
 
-        <div class="input-group input-group-sm">
-    <span class="input-group-addon clickimage" id="datepicker1click">
-      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            <div class="input-group input-group-sm">
+        <span class="input-group-addon clickimage" id="datepicker1click">
+          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 
-    </span>
-          <input type="text" class="form-control" placeholder="Von" aria-describedby="sizing-addon3" id="datepicker1">
+        </span>
+              <input type="text" class="form-control" placeholder="Von" aria-describedby="sizing-addon3" id="datepicker1">
+            </div>
+
+            <div class="input-group input-group-sm">
+        <span class="input-group-addon clickimage" id="datepicker2click">
+          <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+
+        </span>
+              <input type="text" class="form-control" placeholder="Bis" aria-describedby="sizing-addon3" id="datepicker2">
+            </div>
+
+          </div>
+
+          <!--ScoreSlider-->
+          <div id="SPSlider">
+            ScorePoints:
+            <div id="SP1" class="SP"></div>
+            -
+            <div id="SP2" class="SP"></div>
+            <div id="slider-2" class="slider"></div>
+          </div>
         </div>
 
-        <div class="input-group input-group-sm">
-    <span class="input-group-addon clickimage" id="datepicker2click">
-      <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+        <!--Legend for projects an location-->
 
-    </span>
-          <input type="text" class="form-control" placeholder="Bis" aria-describedby="sizing-addon3" id="datepicker2">
+        <div id="legend">
+
+          <div class="legendItem"><%= image_tag "red-circle-lv.png" %> Mein Standort</div>
+          <div class="legendItem"><%= image_tag "ylw-circle-lv.png" %> Projekte
+            <span class="badge"><%= Project.count(:id) %></span></div>
+
         </div>
 
-      </div>
-
-      <!--ScoreSlider-->
-      <div id="SPSlider">
-        ScorePoints:
-        <div id="SP1" class="SP"></div>
-        -
-        <div id="SP2" class="SP"></div>
-        <div id="slider-2" class="slider"></div>
-      </div>
-    </div>
-
-    <!--Legend for projects an location-->
-
-    <div id="legend">
-
-      <div class="legendItem"><%= image_tag "red-circle-lv.png" %> Mein Standort</div>
-      <div class="legendItem"><%= image_tag "ylw-circle-lv.png" %> Projekte <span class="badge"><%= Project.count(:id) %></span></div>
-
-    </div>
 
   </div>
 
   <!-- Map -->
-  <div class="floatleft widthin staticheight" id="map-canvas"></div>
+<div class="col-md-6 staticheight" id="map-canvas"></div>
+  <!--<div class="floatleft widthin staticheight" id="map-canvas"></div>-->
 
   <!-- Projects -->
-  <div class="floatleft border1pxsolidgrey widthout staticheight">
+  <div class="col-md-3 border1pxsolidgrey staticheight">
+  <!--<div class="floatleft border1pxsolidgrey widthout staticheight">-->
 
     <div class="listProject">
       <div class="bold">Projekt 1: Kindergarten</div>
       <div class="italic">Mit Kindern im Kindergarten spielen.</div>
-      <div class="scorePoints">ScorePoints: <%= Project.where(id:2).pluck(:score) %></div>
+      <div class="scorePoints">ScorePoints: <%= Project.where(id: 2).pluck(:score) %></div>
       <%= link_to "weitere Infos", project_path(2) %>
     </div>
 
     <div class="listProject">
       <div class="bold">Projekt 2: DHZ München</div>
       <div class="italic">Spielenachmittag mit herzkranken Menschen.</div>
-      <div class="scorePoints">ScorePoints: <%= Project.where(id:1).pluck(:score) %></div>
+      <div class="scorePoints">ScorePoints: <%= Project.where(id: 1).pluck(:score) %></div>
       <%= link_to "weitere Infos", project_path(1) %>
     </div>
 
@@ -376,10 +396,31 @@
 
 </div>
 
+<div class="clearfix"></div>
 
 
-<div class="clear"></div>
-
+<hr>
+<div id="top-projects">
+  <h2>Top Projekte</h2>
+    <%= render partial: "project_carousel", locals: {projects: @top_projects} %>
+</div>
+<hr>
+<div id="top-users">
+  <h2>Top Helfer</h2>
+  <ul class="list-inline">
+    <%= render partial: "projects/user", collection: @top_users %>
+  </ul>
+</div>
+<% unless signed_in?%>
+<hr>
+<div id="signup-large">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <%= link_to "Jetzt Mitmachen!", new_user_registration_path, class:["btn","btn-success", "btn-gigantic"] %>
+    </div>
+  </div>
+ <% end%>
+</div>
 
 
 
