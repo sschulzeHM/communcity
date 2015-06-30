@@ -28,4 +28,13 @@ module ApplicationHelper
       end
   end
 
+  def format_time_difference time_difference
+    time = ""
+    time << "#{time_difference[:years]} Jahr(e) " if time_difference[:years] > 0
+    time << "#{time_difference[:months]} Monat(e) " if time_difference[:months] > 0
+    time << "#{time_difference[:days]} Tag(e) " if time_difference[:days]> 0
+    time << "#{time_difference[:hours]} Stunde(n)" if time_difference[:hours]> 0
+    return time
+  end
+
   end

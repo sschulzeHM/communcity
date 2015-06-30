@@ -7,14 +7,15 @@ class Project < ActiveRecord::Base
   STATE = {UPCOMING: "Kommt bald", IN_PROGRESS: "Läuft", OVER: "Vorbei", DONE: "Abgeschlossen"}
 
   scope :done, -> { where(done: true)}
+  scope :by_date, -> {order(date_from: :desc)}
 
 
-  def self.by_date
-    Project.all.order(date_from: :desc)
-  end
+  # def self.by_date
+  #   Project.all.order(date_from: :desc)
+  # end
 
   def duration
-    TimeDifference.between(date_from, date_to).in_hours
+    TimeDifference.between(date_from, date_to).in_general
   end
 
   def calc_score

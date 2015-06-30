@@ -35,7 +35,7 @@
         <li class="list-group-item">-->
         <div class="col-md-4">
           <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-          <span class="sr-only">Dauer: </span> <%= @project.duration %>
+          <span class="sr-only">Dauer: </span> <%=  format_time_difference @project.duration %>
         </div>
         <div class="col-md-4">
           <span class="<%= state_label_class @project.state %>"><%= @project.state %></span>
@@ -75,8 +75,10 @@
             <%= button_to "Keine Lust mehr...", remove_project_path, method: :delete, class: ["btn", "btn-danger", "btn-lg"] %>
         <% end %>
     <% elsif organisation_signed_in? %>
-        <%= link_to "Projekt abschließen", done_project_path, class: ["btn", "btn-success", "btn-lg"], method: :post unless @project.has_state? Project::STATE[:DONE] %>
-        <%= link_to "Projekt editieren", edit_project_path(@project), class: ["btn", "btn-primary", "btn-lg"], method: :get %>
+        <% if @project.organisation.eql? current_organisation%>
+            <%= link_to "Projekt abschließen", done_project_path, class: ["btn", "btn-success", "btn-lg"], method: :post unless @project.has_state? Project::STATE[:DONE] %>
+            <%= link_to "Projekt editieren", edit_project_path(@project), class: ["btn", "btn-primary", "btn-lg"], method: :get %>
+        <% end%>
     <% else %>
         <%= link_to "Jetzt Mitmachen", new_user_registration_path, class: ["btn", "btn-success", "btn-lg"] %>
     <% end %>
