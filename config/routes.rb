@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  # You can have the root of your site routed with "root"
+  root 'static#index'
+
+  get 'static/agb' => 'static#agb'
+  get 'static/impressum' => 'static#impressum'
+  get 'static/contact' => 'static#contact'
+  get 'static/index'
+
   resources :projects do
     member do
       post :add
@@ -8,7 +16,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'static/index'
 
   #resources :projects
   devise_for :organisations
@@ -17,16 +24,11 @@ Rails.application.routes.draw do
   resources :users, only: :show
   resources :organisations, only: :show
   #get 'user/show/:id' => "profiles#show_user"
-  #get 'organisation/show/:id' => "profiles#show_organisation"
+  get 'organisation/show/:id' => "profiles#show_organisation"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  root 'static#index'
 
-  get 'static/agb' => 'static#agb'
-  get 'static/impressum' => 'static#impressum'
-  get 'static/contact' => 'static#contact'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -276,12 +276,10 @@
 <% end %>
 
 <div id="video" class="row">
-    <div class="col-md-12">
-      <video width="100%" height="300" autoplay loop muted poster="assets/communcity-explainer-poster.jpg">
-        <source src="assets/communcity-explainer.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
+  <video width="100%" height="300" autoplay muted poster="assets/communcity-explainer-poster.jpg">
+    <source src="assets/communcity-explainer.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 </div>
 
 
@@ -407,9 +405,12 @@
 <hr>
 <div id="signup-large">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <%= link_to "Jetzt Mitmachen!", new_user_registration_path, class:["btn","btn-success", "btn-gigantic"] %>
+    <div class="jumbotron">
+      <h1>Mach den ersten Schritt zum besseren Menschen!</h1>
+      <p>Werde Teil bei Communcity und nimm an verantwortungsvollen Projekten mit anderen interessanten Ehrenamtlichen teil.</p>
+      <p><%= link_to "Jetzt Mitmachen!", new_user_registration_path, class:["btn","btn-success", "btn-gigantic"] %></p>
     </div>
+
   </div>
  <% end%>
 </div>
