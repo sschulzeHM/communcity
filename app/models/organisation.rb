@@ -5,6 +5,8 @@ class Organisation < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :projects
+  validates :name, presence: true, uniqueness: true, length: {in: 3..25} #erm good enough imho
+  validates :location, presence: true
 
   before_save :calc_score
 

@@ -9,7 +9,24 @@ class Project < ActiveRecord::Base
   scope :done, -> { where(done: true)}
   scope :by_date, -> {order(date_from: :desc)}
 
+  validates :name, presence: true, length: {in: 3..25}
+  validates :date_from, presence: true
+  validates :date_to, presence: true
+  validates :max_users, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :location, presence: true
 
+  validate :date_from_not_in_the_past
+  validate :date_from_after_date_to
+
+  def date_from_not_in_the_past
+    errors.add(:date_from, "can't be in the past") if
+        !date_from.blank? and date_from < Date.today
+  end
+
+  def date_from_after_date_to
+    errors.add(:date_to, "must be after date_to") if
+        !date_to.blank? and date_to < date_from
+  end
   # def self.by_date
   #   Project.all.order(date_from: :desc)
   # end

@@ -6,6 +6,11 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :projects
 
+  validates :first_name, presence: true, length: {in: 3..15}
+  validates :last_name, presence: true, length: {in: 3..20}
+  validates :location, presence: true
+
+
   def done_projects
     projects.done
   end
