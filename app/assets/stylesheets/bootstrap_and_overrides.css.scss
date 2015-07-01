@@ -93,3 +93,8 @@ a.btn:visited{
   color: white;
 }
 
+@media (max-width: 1000px) {
+  h1, .h1, .jumbotron h1, .jumbotron .h1{
+    font-size: 30px;
+  }
+}

@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   scope :done, -> { where(done: true)}
   scope :by_date, -> {order(date_from: :desc)}
 
-  validates :name, presence: true, length: {in: 3..25}
+  validates :name, presence: true, length: {in: 3..50}
   validates :date_from, presence: true
   validates :date_to, presence: true
   validates :max_users, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
@@ -37,7 +37,7 @@ class Project < ActiveRecord::Base
 
   def calc_score
     #initial score depending on project duration
-    self.score= duration*10
+    self.score= TimeDifference.between(date_from, date_to).in_hours*10
     #bonus depending on number of users
     self.score += users.size*10
   end
