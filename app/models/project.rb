@@ -15,7 +15,7 @@ class Project < ActiveRecord::Base
   validates :max_users, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :location, presence: true
 
-  validate :date_from_not_in_the_past
+  validate :date_from_not_in_the_past, on: :create
   validate :date_from_after_date_to
 
   def date_from_not_in_the_past
