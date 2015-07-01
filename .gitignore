@@ -2,8 +2,8 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 #ignore uploaded images for test data
-/app/assets/images/banners
-/app/assets/images/small_banners
+#/app/assets/images/banners
+#/app/assets/images/small_banners
 #ignore rubymine ide files
 /.idea
 
