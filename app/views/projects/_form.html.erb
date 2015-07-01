@@ -2,72 +2,78 @@
     var lasttarget = "undefined";
 
     function handleThumbnailClick(image, source) {
+        // reset style of last selected
         if(lasttarget != "undefined") { lasttarget.style.border = "none"; }
 
+        // set last selected
         lasttarget = image;
+
+        // set image path to @project.banner_url
         $('#project_banner_url').val(source);
-        image.style.border = "thin solid #0000FF";
+
+        // change border
+        image.style.border = "solid #004C8E";
     };
 
 <% end %>
 
 <%= semantic_form_for @project do |f| %>
   <%= f.inputs  do%>
-        <%= f.input :name %>
-        <%= f.input :location %>
-        <%= f.input :date_from%>
-        <%= f.input :date_to%>
-        <%= f.input :description%>
-        <%= f.input :max_users%>
-        <%= f.input :category%>
-        <%= f.input :banner_url, :html => {:id => "bannerUrlInput"}%>
+        <%= f.input :name, :label => 'Name' %>
+        <%= f.input :location, :label => 'Ort' %>
+        <%= f.input :date_from, :label => 'Startdatum'%>
+        <%= f.input :date_to, :label => 'Enddatum'%>
+        <%= f.input :description, :label => 'Beschreibung'%>
+        <%= f.input :max_users, :label => 'Anzahl der Teilnehmer'%>
+        <%= f.input :category, :label => 'Kategorie'%>
+        <%= f.input :banner_url, :html => {:id => "bannerUrlInput"}, :as => :hidden %>
 
-        <span class="form-label"><label for="project_banner" class=" control-label">Projekt Logo</label></span>
+        <span class="form-label"><label for="project_banner" class=" control-label">Bild zum Projekt</label></span>
         <div class="panel panel-default">
           <div class="panel-body" id="thumbnailpanel">
             <div class="row">
               <div class="col-sm-3 col-md-3">
                 <a class="thumbnail">
-                  <img src="../../assets/image1.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image1.JPG')">
+                  <img src="../../assets/image1.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image1.jpg')">
                 </a>
                 <a class="thumbnail">
-                  <img src="../../assets/image2.JPG" alt="Image"  height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image2.JPG')">
+                  <img src="../../assets/image2.jpg" alt="Image"  height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image2.jpg')">
                 </a>
                 <a class="thumbnail">
-                  <img src="../../assets/image3.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image3.JPG')">
-                </a>
-              </div>
-              <div class="col-sm-3 col-md-3">
-                <a class="thumbnail">
-                  <img src="../../assets/image4.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image4.JPG')">
-                </a>
-                <a class="thumbnail">
-                  <img src="../../assets/image5.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image5.JPG')">
-                </a>
-                <a class="thumbnail">
-                  <img src="../../assets/image6.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image6.JPG')">
+                  <img src="../../assets/image3.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image3.jpg')">
                 </a>
               </div>
               <div class="col-sm-3 col-md-3">
                 <a class="thumbnail">
-                  <img src="../../assets/image7.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image7.JPG')">
+                  <img src="../../assets/image4.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image4.jpg')">
                 </a>
                 <a class="thumbnail">
-                  <img src="../../assets/image8.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image8.JPG')">
+                  <img src="../../assets/image5.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image5.jpg')">
                 </a>
                 <a class="thumbnail">
-                  <img src="../../assets/image9.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image9.JPG')">
+                  <img src="../../assets/image6.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image6.jpg')">
                 </a>
               </div>
               <div class="col-sm-3 col-md-3">
                 <a class="thumbnail">
-                  <img src="../../assets/image10.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image10.JPG')">
+                  <img src="../../assets/image7.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image7.jpg')">
                 </a>
                 <a class="thumbnail">
-                  <img src="../../assets/image11.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image11.JPG')">
+                  <img src="../../assets/image8.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image8.jpg')">
                 </a>
                 <a class="thumbnail">
-                  <img src="../../assets/image12.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image12.JPG')">
+                  <img src="../../assets/image9.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image9.jpg')">
+                </a>
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <a class="thumbnail">
+                  <img src="../../assets/image10.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image10.jpg')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image11.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image11.jpg')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image12.jpg" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image12.jpg')">
                 </a>
               </div>
 
