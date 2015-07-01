@@ -1,3 +1,5 @@
+# use by calling $ rake export:seeds_format
+
 namespace :export do
   desc "Prints DB enries in a seeds.rb way."
   task :seeds_format => :environment do

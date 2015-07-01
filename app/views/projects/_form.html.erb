@@ -1,3 +1,16 @@
+<%= javascript_tag do %>
+    var lasttarget = "undefined";
+
+    function handleThumbnailClick(image, source) {
+        if(lasttarget != "undefined") { lasttarget.style.border = "none"; }
+
+        lasttarget = image;
+        $('#project_banner_url').val(source);
+        image.style.border = "thin solid #0000FF";
+    };
+
+<% end %>
+
 <%= semantic_form_for @project do |f| %>
   <%= f.inputs  do%>
         <%= f.input :name %>
@@ -5,8 +18,63 @@
         <%= f.input :date_from%>
         <%= f.input :date_to%>
         <%= f.input :description%>
-        <%=  f.input :max_users%>
+        <%= f.input :max_users%>
         <%= f.input :category%>
+        <%= f.input :banner_url, :html => {:id => "bannerUrlInput"}%>
+
+        <span class="form-label"><label for="project_banner" class=" control-label">Projekt Logo</label></span>
+        <div class="panel panel-default">
+          <div class="panel-body" id="thumbnailpanel">
+            <div class="row">
+              <div class="col-sm-3 col-md-3">
+                <a class="thumbnail">
+                  <img src="../../assets/image1.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image1.JPG')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image2.JPG" alt="Image"  height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image2.JPG')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image3.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image3.JPG')">
+                </a>
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <a class="thumbnail">
+                  <img src="../../assets/image4.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image4.JPG')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image5.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image5.JPG')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image6.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image6.JPG')">
+                </a>
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <a class="thumbnail">
+                  <img src="../../assets/image7.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image7.JPG')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image8.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image8.JPG')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image9.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image9.JPG')">
+                </a>
+              </div>
+              <div class="col-sm-3 col-md-3">
+                <a class="thumbnail">
+                  <img src="../../assets/image10.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image10.JPG')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image11.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image11.JPG')">
+                </a>
+                <a class="thumbnail">
+                  <img src="../../assets/image12.JPG" alt="Image" height="200em" width="200em" onclick="handleThumbnailClick(this, 'banners/image12.JPG')">
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
   <% end %>
   <%= f.actions do %>
     <%= f.action :submit, :as => :input %>
